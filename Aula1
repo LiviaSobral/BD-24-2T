@@ -1,0 +1,17 @@
+1. em que ano o modelo ralacional de banco de dados foi desenvolvido?
+1970-1972
+
+2. quem é considerado o "pai dos bancos de dados relacionais"?
+não sei
+
+3.Explique a diferença de um banco de dados, um sistema gerenciador de banco de dados e um sistema de banco de dados.
+banco de dados é onde a informação é guardada, sistema gerenciador pode modificar e acessar essas informações e o sistema de banco de dados só acessa elas.
+
+4.Quais são as principais características de um banco de dados?
+a capacidade de guardar informações e acessar elas
+
+5.Quais são os diferentes níveis de abstração em um banco de dados?
+conceitual, lógico e físico
+
+6.Liste vantagens de usar banco de dados.
+acesso a informações e a segurança
