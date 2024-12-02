@@ -67,3 +67,6 @@ where id_produto = 7
 select * from cliente
 select * from produto
 select * from pedido
+
+delete from pedido where id_pedido = 1
+delete from pedido where id_pedido = 3
