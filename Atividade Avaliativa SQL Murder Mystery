@@ -1,0 +1,35 @@
+id:48Z55 person_id:67318 name:Jeremy Bowers startDate:20160101 status:gold
+
+select * from interview where person_id = 67318
+I was hired by a woman with a lot of money. I don't know her name but I know she's around 5'5" (65") or 5'7" (67"). She has red hair and she drives a Tesla Model S. I know that she attended the SQL Symphony Concert 3 times in December 2017. 
+
+select * from drivers_license where hair_color = 'red' and gender = 'female' and car_make = 'Tesla'
+id	age	height	eye_color	hair_color	gender	plate_number	car_make	car_model
+202298	68	66	green	red	female	500123	Tesla	Model S
+291182	65	66	blue	red	female	08CM64	Tesla	Model S
+918773	48	65	black	red	female	917UU3	Tesla	Model S
+
+select * from person where license_id = 202298
+id	name	license_id	address_number	address_street_name	ssn
+99716	Miranda Priestly	202298	1883	Golden Ave	987756388
+
+select * from person where license_id = 291182
+id	name	license_id	address_number	address_street_name	ssn
+90700	Regina George	291182	332	Maple Ave	337169072
+
+select * from person where license_id = 918773
+id	name	license_id	address_number	address_street_name	ssn
+78881	Red Korb	918773	107	Camerata Dr	961388910
+
+select * from facebook_event_checkin where person_id = 99716
+person_id	event_id	event_name	date
+99716	1143	SQL Symphony Concert	20171206
+99716	1143	SQL Symphony Concert	20171212
+99716	1143	SQL Symphony Concert	20171229
+
+select * from income where ssn = '987756388'
+ssn	annual_income
+987756388	310000
+
+INSERT INTO solution VALUES (1, 'Miranda Priestly');
+SELECT value FROM solution;
