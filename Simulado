@@ -1,0 +1,91 @@
+create table casa (
+    id_casa serial,
+    nome_casa varchar(20)
+)
+create table aluno (
+    id_aluno serial,
+    nome_aluno varchar(80),
+    Fk_casa int references casa(id_casa),
+    FK_feitico int references feitico(id_feitico),
+    data_de_nascimento int
+)
+create table materia(
+    id_materia serial,
+    nome_materia varchar(30)
+)
+create table professor(
+    id_professor serial,
+    nome_professor varchar(80),
+    Fk_materia int references materia(id_materia),
+    fk_casa int references casa(id_casa)
+)
+create table feitico(
+    id_feitico serial,
+    nome_feitico varchar(80),
+    effeito varchar(80)
+)
+insert into casa(nome_casa)
+values("Grifinória"),
+("Sonserina"),
+("Corvinal"),
+("Lufa-Lufa")
+
+insert into aluno(nome_aluno,Fk_casa,FK_feitico,data_de_nascimento)
+values("Harry Potter",1,1,1234),
+("Rony Weasley",1,2,5678),
+("Hermione Granger",1,3,9101),
+("Luna Lovegood",3,4,1121),
+("Cho Chang",3,5,3141),
+("Draco Malfoy",2,6,5161),
+("Vincent Crabbe",2,7,7181),
+("Gregory Goyle",2,8,9202),
+("Cedrico Diggory",4,9,1222),
+("Zacharias Smith",4,10,3242)
+
+insert into materia(nome_materia)
+values("Transfiguração"),
+("Astronomia"),
+("Estudo de Runas Antigas"),
+("Defesa Contra as Artes das Trevas"),
+("História da Magia"),
+("Feitiços"),
+("Herbologia"),
+("Poções")
+
+insert into professor(nome_professor,Fk_materia,fk_casa)
+values("Alvo Dumbledore",1,1),
+("Aurora Sinistra",2,1),
+("Bathsheda Babbling",3,2),
+("Bartolomeu Crouch Jr",4,2),
+("Cuthbert Binns",5,3),
+("Fílio Flitwick",6,3),
+("Herbert Beery",7,4),
+("Severo Snape",8,4)
+
+insert into feitico(nome_feitico,effeito)
+values("Abelharus","enchame de abelhas"),
+("Accio","Atrai o objeto desejado"),
+("Aero Volantis","Faz a pessoa atingida voar para o céu"),
+("Ascendio","Puxa o bruxo ou algo para cima"),
+("Aguamenti","Conjura água da ponta da varinha"),
+("Aqua Flagellum","Conjura um chicote d ´agua"),
+("Animus Corpus","O feitiço é capaz de animar objetos inanimados"),
+("Armuns Terrenio","Faz uma arma de acordo com os pensamento do bruxo"),
+("Baubillious","produz um jato de raio branco na varinha"),
+("Bombarda","Causa uma explosão"),
+("Braquium Remendo","Cura ossos quebrados"),
+("Circus Infalamre","Conjura um circulo de fogo"),
+("Everte Statum","Causa dor aguda")
+
+select nome_casa from casa
+join aluno
+on id_casa.casa = Fk_casa.aluno
+join professor
+on id_casa.casa = fk_casa.professor
+
+select nome_aluno from aluno where Fk_casa = 1
+
+create or replace view view_personagens_grifinoria as
+select nome_aluno,data_de_nascimento from aluno where Fk_casa = 1
+
+create index on aluno(nome_aluno)
