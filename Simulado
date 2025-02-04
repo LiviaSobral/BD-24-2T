@@ -1,91 +1,118 @@
 create table casa (
-    id_casa serial,
-    nome_casa varchar(20)
+    id_casa serial primary key,
+    nome_casa varchar(60)
+)
+create table personagem(
+	id_personagem serial primary key,
+	nome_personagem varchar(80),
+	Fk_casa int not null references casa(id_casa),
+    FK_feitico int not null references feitico(id_feitico)
 )
 create table aluno (
-    id_aluno serial,
-    nome_aluno varchar(80),
-    Fk_casa int references casa(id_casa),
-    FK_feitico int references feitico(id_feitico),
+    Fk_personagem int not null references personagem(id_personagem),
     data_de_nascimento int
 )
 create table materia(
-    id_materia serial,
-    nome_materia varchar(30)
+    id_materia serial primary key,
+    nome_materia varchar(80)
 )
 create table professor(
-    id_professor serial,
-    nome_professor varchar(80),
-    Fk_materia int references materia(id_materia),
-    fk_casa int references casa(id_casa)
+    Fk_personagem int not null references personagem(id_personagem),
+    Fk_materia int not null references materia(id_materia)
 )
 create table feitico(
-    id_feitico serial,
+    id_feitico serial primary key,
     nome_feitico varchar(80),
-    effeito varchar(80)
+    effeito varchar(100)
 )
-insert into casa(nome_casa)
-values("Grifinória"),
-("Sonserina"),
-("Corvinal"),
-("Lufa-Lufa")
 
-insert into aluno(nome_aluno,Fk_casa,FK_feitico,data_de_nascimento)
-values("Harry Potter",1,1,1234),
-("Rony Weasley",1,2,5678),
-("Hermione Granger",1,3,9101),
-("Luna Lovegood",3,4,1121),
-("Cho Chang",3,5,3141),
-("Draco Malfoy",2,6,5161),
-("Vincent Crabbe",2,7,7181),
-("Gregory Goyle",2,8,9202),
-("Cedrico Diggory",4,9,1222),
-("Zacharias Smith",4,10,3242)
+insert into casa(nome_casa)
+Values('Grifinória'),
+('Sonserina'),
+('Corvinal'),
+('Lufa-Lufa')
+
+insert into personagem(nome_personagem,Fk_casa,Fk_feitico)
+values ('Harry Potter',1,1),
+('Rony Weasley',1,2),
+('Hermione Granger',1,3),
+('Luna Lovegood',3,4),
+('Cho Chang',3,5),
+('Draco Malfoy',2,6),
+('Vincent Crabbe',2,7),
+('Gregory Goyle',2,8),
+('Cedrico Diggory',4,9),
+('Zacharias Smith',4,10),
+('Alvo Dumbledore',1,1),
+('Aurora Sinistra',2,1),
+('Bathsheda Babbling',3,2),
+('Bartolomeu Crouch Jr',4,2),
+('Cuthbert Binns',4,3),
+('Fílio Flitwick',3,3),
+('Herbert Beery',3,4),
+('Severo Snape',2,4)
+
+insert into aluno(Fk_personagem,data_de_nascimento)
+values(1,1234),
+(2,5678),
+(3,9101),
+(4,1121),
+(5,3141),
+(6,5161),
+(7,7181),
+(8,9202),
+(9,1222),
+(10,3242)
 
 insert into materia(nome_materia)
-values("Transfiguração"),
-("Astronomia"),
-("Estudo de Runas Antigas"),
-("Defesa Contra as Artes das Trevas"),
-("História da Magia"),
-("Feitiços"),
-("Herbologia"),
-("Poções")
+values('Transfiguração'),
+('Astronomia'),
+('Estudo de Runas Antigas'),
+('Defesa Contra as Artes das Trevas'),
+('História da Magia'),
+('Feitiços'),
+('Herbologia'),
+('Poções')
 
-insert into professor(nome_professor,Fk_materia,fk_casa)
-values("Alvo Dumbledore",1,1),
-("Aurora Sinistra",2,1),
-("Bathsheda Babbling",3,2),
-("Bartolomeu Crouch Jr",4,2),
-("Cuthbert Binns",5,3),
-("Fílio Flitwick",6,3),
-("Herbert Beery",7,4),
-("Severo Snape",8,4)
+insert into professor(Fk_personagem,Fk_materia)
+values(11,1),
+(12,1),
+(13,2),
+(14,2),
+(15,3),
+(16,3),
+(17,4),
+(18,4)
 
 insert into feitico(nome_feitico,effeito)
-values("Abelharus","enchame de abelhas"),
-("Accio","Atrai o objeto desejado"),
-("Aero Volantis","Faz a pessoa atingida voar para o céu"),
-("Ascendio","Puxa o bruxo ou algo para cima"),
-("Aguamenti","Conjura água da ponta da varinha"),
-("Aqua Flagellum","Conjura um chicote d ´agua"),
-("Animus Corpus","O feitiço é capaz de animar objetos inanimados"),
-("Armuns Terrenio","Faz uma arma de acordo com os pensamento do bruxo"),
-("Baubillious","produz um jato de raio branco na varinha"),
-("Bombarda","Causa uma explosão"),
-("Braquium Remendo","Cura ossos quebrados"),
-("Circus Infalamre","Conjura um circulo de fogo"),
-("Everte Statum","Causa dor aguda")
+values('Abelharus','"enchame de abelhas"'),
+('Accio','"Atrai o objeto desejado"'),
+('Aero Volantis','"Faz a pessoa atingida voar para o céu"'),
+('Ascendio','"Puxa o bruxo ou algo para cima"'),
+('Aguamenti','"Conjura água da ponta da varinha"'),
+('Aqua Flagellum','"Conjura um chicote d ´agua"'),
+('Animus Corpus','"O feitiço é capaz de animar objetos inanimados"'),
+('Armuns Terrenio','"Faz uma arma de acordo com os pensamento do bruxo"'),
+('Baubillious','"produz um jato de raio branco na varinha"'),
+('Bombarda','"Causa uma explosão"'),
+('Braquium Remendo','"Cura ossos quebrados"'),
+('Circus Infalamre','"Conjura um circulo de fogo"'),
+('Everte Statum','"Causa dor aguda"')
 
-select nome_casa from casa
+select nome_casa,nome_personagem from casa
+join personagem
+on personagem.Fk_casa = casa.id_casa
+
+select nome_personagem 
+from personagem
 join aluno
-on id_casa.casa = Fk_casa.aluno
-join professor
-on id_casa.casa = fk_casa.professor
-
-select nome_aluno from aluno where Fk_casa = 1
+on personagem.id_personagem = aluno.Fk_personagem
+where Fk_casa = 1
 
 create or replace view view_personagens_grifinoria as
-select nome_aluno,data_de_nascimento from aluno where Fk_casa = 1
+select nome_personagem,data_de_nascimento from personagem
+join aluno
+on personagem.id_personagem = aluno.Fk_personagem
+where Fk_casa = 1
 
-create index on aluno(nome_aluno)
+create index on personagem(nome_personagem)
