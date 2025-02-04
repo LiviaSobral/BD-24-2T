@@ -1,0 +1,67 @@
+create table cliente(
+	id_cliente int primary key,
+	salario money not null
+)
+
+insert into cliente(id_cliente, salario)
+values (1,1400)
+
+create table historico_Salarial(
+	id_histrico serial primary key,
+	id_cliente int references cliente(id_cliente),
+	data_alteracao date,
+	salario money
+)
+
+create or replace function atualizacao_salario() returns
+trigger as $$ begin
+insert into historico_Salarial(id_cliente,data_alteracao,salario)
+values(new.id_cliente,NOW(),new.salario);
+return null; end; $$LANGUAGE plpgsql;
+
+create or replace trigger trigger_salario
+after insert or update on cliente
+for each row 
+execute function atualizacao_salario()
+
+update cliente set salario = 1400.01 where id_cliente =1
+update cliente set salario = 1400.02 where id_cliente =1
+update cliente set salario = 1400.03 where id_cliente =1
+update cliente set salario = 1400.04 where id_cliente =1
+
+insert into cliente(id_cliente,salario)
+values(2,2800)
+
+select * from historico_Salarial
+
+create table produto(
+	id_produto int primary key,
+	nome varchar(80),
+	preco money
+)
+
+create table historico_produto(
+	id_historico serial,
+	id_produto int references produto(id_produto),
+	nome varchar(80),
+	preco money
+)
+
+create or replace function atualizar_preco() returns
+trigger as $$ begin
+insert into historico_produto(id_produto,nome,preco)
+values (new.id_produto,new.nome,new.preco);
+return null; end; $$LANGUAGE plpgsql;
+
+create or replace trigger trigger_preco
+after insert or update on produto
+for each row
+execute function atualizar_preco()
+
+insert into produto(id_produto,nome,preco)
+values(1,'Plutonio',12345)
+
+select * from historico_produto
+
+update produto set preco = 909090 where id_produto = 1
+update produto set preco = 1 where id_produto = 1
